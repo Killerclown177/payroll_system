@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script defer src="login.js"></script> <!-- Link the JavaScript file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <label for="userType">Select User Type:</label>
+    <select id="userType">
+        <option value="admin">Admin</option>
+        <option value="employee">Employee</option>
+    </select>
+
+    <form id="loginForm">
+        <div id="usernameDiv" class="hidden">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

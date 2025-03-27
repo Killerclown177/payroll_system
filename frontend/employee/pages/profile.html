@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swift Pay Solutions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80'); /* Background image */
+      background-size: cover;
+      background-position: center;
+    }
+    .header {
+      background-color: rgba(0, 123, 255, 0.9); /* Semi-transparent header */
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .header .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .header .user-info span {
+      margin-right: 10px;
+    }
+    .header .logout-button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .header .logout-button:hover {
+      background-color: #c82333;
+    }
+    .container {
+      display: flex;
+      flex: 1;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: rgba(51, 51, 51, 0.9); /* Semi-transparent sidebar */
+      color: #fff;
+      padding: 20px;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+    }
+    .sidebar a:hover {
+      background-color: #007bff;
+    }
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent main content */
+      border-radius: 8px;
+      margin: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .profile-details, .edit-profile-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .profile-details h2, .edit-profile-form h2 {
+      margin: 0 0 20px 0;
+      font-size: 24px;
+      color: #333;
+    }
+    .profile-details p {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+    .profile-details p strong {
+      display: inline-block;
+      width: 150px;
+      color: #555;
+    }
+    .edit-profile-form label {
+      display: block;
+      margin: 10px 0 5px 0;
+      font-weight: bold;
+      color: #555;
+    }
+    .edit-profile-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .edit-profile-form button, .profile-details button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .edit-profile-form button:hover, .profile-details button:hover {
+      background-color: #218838;
+    }
+    .footer {
+      background-color: rgba(51, 51, 51, 0.9); /* Semi-transparent footer */
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Swift Pay Solutions</h1>
+    <div class="user-info">
+      <span>Welcome, <span id="profileName">kapenguria 1</span></span>
+      <button class="logout-button">Logout</button>
+    </div>
+  </div>
+    <div class="main-content">
+      <!-- Profile Details Section -->
+      <div class="profile-details" id="profileDetails">
+        <h2>Profile</h2>
+        <p><strong>Name:</strong> <span id="name"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Bank Account Number:</strong> <span id="bankAccount"></span></p>
+        <p><strong>Phone Number:</strong> <span id="phone"></span></p>
+        <p><strong>Department:</strong> <span id=""></span></p>
+        <button onclick="toggleEditMode()">Edit Profile</button>
+      </div>
+
+      <!-- Edit Profile Form Section -->
+      <div class="edit-profile-form hidden" id="editProfileForm">
+        <h2>Edit Profile</h2>
+        <form id="profileForm">
+          <label for="editName">Name:</label>
+          <input type="text" id="editName" name="name" required>
+
+          <label for="editEmail">Email:</label>
+          <input type="email" id="editEmail" name="email" required>
+
+          <label for="editBankAccount">Bank Account Number:</label>
+          <input type="text" id="editBankAccount" name="bankAccount" required>
+
+          <label for="editPhone">Phone Number:</label>
+          <input type="tel" id="editPhone" name="phone" required>
+
+          <label for="editDepartment">Department:</label>
+          <input type="text" id="editDepartment" name="department" required>
+
+          <button type="submit">Save Changes</button>
+          <button type="button" onclick="toggleEditMode()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Swift Pay Solutions | © 2025</p>
+  </div>
+
+  <script>
+    // Load profile data from local storage
+    function loadProfile() {
+      const profile = JSON.parse(localStorage.getItem('profile')) || {
+        name: "",
+        email: "",
+        bankAccount: "",
+        phone: "",
+        department: ""
+      };
+
+      // Update the profile page with the loaded data
+      document.getElementById('profileName').textContent = profile.name;
+      document.getElementById('name').textContent = profile.name;
+      document.getElementById('email').textContent = profile.email;
+      document.getElementById('bankAccount').textContent = profile.bankAccount;
+      document.getElementById('phone').textContent = profile.phone;
+      document.getElementById('department').textContent = profile.department;
+
+      // Pre-fill the edit form with the loaded data
+      document.getElementById('editName').value = profile.name;
+      document.getElementById('editEmail').value = profile.email;
+      document.getElementById('editBankAccount').value = profile.bankAccount;
+      document.getElementById('editPhone').value = profile.phone;
+      document.getElementById('editDepartment').value = profile.department;
+    }
+
+    // Toggle between view and edit modes
+    function toggleEditMode() {
+      const profileDetails = document.getElementById('profileDetails');
+      const editProfileForm = document.getElementById('editProfileForm');
+      profileDetails.classList.toggle('hidden');
+      editProfileForm.classList.toggle('hidden');
+    }
+
+    // Save profile data
+    document.getElementById('profileForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get the updated profile data from the form
+      const updatedProfile = {
+        name: document.getElementById('editName').value,
+        email: document.getElementById('editEmail').value,
+        bankAccount: document.getElementById('editBankAccount').value,
+        phone: document.getElementById('editPhone').value,
+        department: document.getElementById('editDepartment').value
+      };
+
+      // Save the updated profile data to local storage
+      localStorage.setItem('profile', JSON.stringify(updatedProfile));
+
+      // Reload the profile data to reflect changes
+      loadProfile();
+
+      // Switch back to view mode
+      toggleEditMode();
+
+      alert("Profile updated successfully!");
+    });
+
+    // Load profile data when the page loads
+    loadProfile();
+
+    // Logout button functionality
+    document.querySelector('.logout-button').addEventListener('click', function () {
+      alert("You have been logged out.");
+      window.location.href = "login.html"; // Redirect to login page
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:skyblue;
+            background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80'); /* Background image */
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background: lavenderblush;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }.
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Employee Attendance</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="attendanceTable">
+                <!-- Data will be inserted here from the database -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Fetch attendance data from the backend
+        fetch('http://localhost/payroll_system/backend/get_attendance.php')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('attendanceTable');
+                data.forEach(row => {
+                    table.innerHTML += `
+                        <tr>
+                            <td>${row.employee_id}</td>
+                            <td>${row.name}</td>
+                            <td>${row.date}</td>
+                            <td>${row.status}</td>
+                        </tr>`;
+                });
+            })
+            .catch(error => console.error('Error fetching attendance:', error));
+    </script>
+
+</body>
+</html>

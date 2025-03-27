@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Swift pay Solutions Salary Slip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: ('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .salary-slip {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .details, .earnings, .deductions, .bank-details {
+            margin-bottom: 15px;
+        }
+
+        .details label, .earnings label, .deductions label, .bank-details label {
+            font-weight: bold;
+        }
+
+        .amount {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .total {
+            font-size: 1.2em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Swift pay Solutions Salary Slip</h1>
+        <div class="salary-slip">
+            <div class="details">
+                <h2>Employee Details</h2>
+                <label>Employee Name:</label><br>
+                <label>Employee ID:</label> <br>
+                <label>Department:</label> <br>
+                <label>Start Period:</label><br>
+            </div>
+            <div class="earnings">
+                <h2>Earnings</h2>
+                <label>Basic Salary:</label> <span class="amount"></span><br>
+                <label>Overtime:</label> <span class="amount"></span><br>
+                <label>Bonus:</label> <span class="amount"></span><br>
+                <div class="total">
+                    <label>Total Earnings:</label> <span class="amount"></span>
+                </div>
+            </div>
+            <div class="deductions">
+                <h2>Deductions</h2>
+                <label>Tax:</label> <span class="amount"></span><br>
+                <label>Social Security:</label> <span class="amount"></span><br>
+                <label>Health Insurance:</label> <span class="amount"></span><br>
+                <div class="total">
+                    <label>Total Deductions:</label> <span class="amount"></span>
+                </div>
+            </div>
+            <div class="total">
+                <label>Net Salary:</label> <span class="amount"></span>
+            </div>
+            <div class="bank-details">
+                <h2>Bank Details</h2>
+                <label>Bank Name:</label><br>
+                <label>Account Number:</label> <br>
+                <label>Payment Method:</label><br>
+            </div>
+        </div>
+    </div>
+<script src="../../js/payroll.js"></script>
+</body>
+</html>
+
+</body>
+</html>
+

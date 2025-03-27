@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Slip</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #007BFF;
+            text-align: center;
+            font-size: 2.5em;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-header {
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .total {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Salary Slip</h1>
+
+        <div class="section">
+            <div class="sub-header">Employee Details</div>
+            <div class="item"><span>Name:</span><span id="employeeName"></span></div>
+            <div class="item"><span>Employee ID:</span><span id="employeeID"></span></div>
+            <div class="item"><span>Department:</span><span id="department"></span></div>
+            <div class="item"><span>Bank Account:</span><span id="bankAccount"></span></div>
+        </div>
+
+        <div class="section">
+            <div class="sub-header">Earnings</div>
+            <div class="item"><span>Basic Salary:</span><span id="basicSalary"></span></div>
+            <div class="item"><span>HRA:</span><span id="hra"></span></div>
+            <div class="item"><span>Other Allowances:</span><span id="otherAllowances"></span></div>
+            <div class="item total"><span>Total Earnings:</span><span id="totalEarnings"></span></div>
+        </div>
+
+        <div class="section">
+            <div class="sub-header">Deductions</div>
+            <div class="item"><span>Tax:</span><span id="tax"></span></div>
+            <div class="item"><span>Insurance:</span><span id="insurance"></span></div>
+            <div class="item total"><span>Total Deductions:</span><span id="totalDeductions"></span></div>
+        </div>
+
+        <div class="section">
+            <div class="sub-header">Net Pay</div>
+            <div class="item total"><span>Net Salary:</span><span id="netSalary"></span></div>
+        </div>
+
+        <div class="footer">
+            Thank you for your hard work!
+        </div>
+    </div>
+<script>
+    function fetchSalarySlip() {
+        let employeeId = prompt("Enter Employee ID:");
+
+        if (employeeId) {
+            fetch(`../../backend/get_salary_slip.php?employee_id=${employeeId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.querySelector(".container").innerHTML = `<p style="text-align:center;color:red;">${data.error}</p>`;
+                } else {
+                    document.getElementById("employeeName").innerText = data.name;
+                    document.getElementById("employeeID").innerText = data.employee_id;
+                    document.getElementById("department").innerText = data.department;
+                    document.getElementById("bankAccount").innerText = data.bank_account;
+                    document.getElementById("basicSalary").innerText = `$${data.basic_salary}`;
+                    document.getElementById("otherAllowances").innerText = `$${data.allowances}`;
+                    let totalEarnings = parseFloat(data.basic_salary) + parseFloat(data.allowances);
+                    let totalDeductions = parseFloat(data.deductions);
+                    let netSalary = parseFloat(data.net_salary);
+                    document.getElementById("totalEarnings").innerText = `$${totalEarnings}`;
+                    document.getElementById("totalDeductions").innerText = `$${totalDeductions}`;
+                    document.getElementById("netSalary").innerText = `$${netSalary}`;
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    }
+
+    fetchSalarySlip();
+</script>
+
+    
+
+</body>
+</html>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Report</title>
+    <style>
+        body {
+            font-family:arial;
+            margin: 0;
+            padding: 20px;
+            background-color:none;
+            background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80'); /* Background image */
+            background-size: cover;
+            background-position: center;
+        }
+        h1 {
+            text-align: center;
+            color: black;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color:white;
+        }
+        table, th, td {
+            border: 1px solid white;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color:skyblue;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: white;
+        }
+        tr: {
+            background-color:black;
+        }
+        .report-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Payroll Report</h1>
+    <div class="tab">
+        <div class="tab" onclick="showTab('reports')">Reports</div>
+    </div>
+
+        <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Total Pay</th>
+            </tr>
+        </thead>
+    
+    </table>
+</body>
+</html>
